@@ -18,6 +18,7 @@
   --wine:#7a2a35;
   --blush:#ecc6c0;
   --ink:#22322d;
+  --navy:#24466b;
   --soft:#5b6f67;
   --serif:'Noto Serif TC','Songti TC','PMingLiU',serif;
   --cap:'Italiana','Noto Serif TC',serif;
@@ -53,7 +54,7 @@ button,input,select,textarea{font-family:inherit;font-size:16px;color:inherit}
 .env{position:relative;width:min(88vw,400px);aspect-ratio:3/2;margin-top:70px}
 .env .back{position:absolute;inset:0;background:#cfdcd2;border-radius:4px}
 .letter{position:absolute;left:6%;right:6%;top:6%;bottom:6%;background:var(--paper);border:1px solid var(--gold);z-index:1;display:grid;place-items:center;text-align:center;transition:transform 1s cubic-bezier(.3,.9,.3,1) .5s;box-shadow:0 2px 10px rgba(0,0,0,.15)}
-.letter span{font-family:var(--script);font-style:italic;font-size:32px;color:var(--gold-ink);line-height:1.1}
+.letter span{font-family:var(--script);font-size:32px;color:var(--gold-ink);line-height:1.1}
 .front{position:absolute;inset:0;z-index:2;background:#e9f0ea;clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);border-radius:4px}
 .front::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(31,58,52,.10))}
 .flap{position:absolute;left:0;right:0;top:0;height:64%;z-index:3;background:#dbe6dd;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:50% 0;transition:transform .8s ease,z-index 0s linear .4s;border-radius:4px 4px 0 0}
@@ -79,11 +80,12 @@ p{margin:0 0 14px}
 .orn i{width:7px;height:7px;background:var(--gold);transform:rotate(45deg)}
 
 .hero{position:relative;background:linear-gradient(180deg,var(--sage),var(--paper));padding-top:72px;padding-bottom:80px;overflow:hidden}
-.hero .script{font-family:var(--script);font-style:italic;font-size:46px;color:var(--gold-ink);line-height:1.2;margin:0 0 6px}
+.hero .script{font-family:var(--script);font-size:46px;color:var(--gold-ink);line-height:1.2;margin:0 0 6px}
 .names{display:flex;flex-direction:column;align-items:center;margin:4px 0 26px;gap:12px}
-.names .en{font-family:var(--script);font-style:italic;font-size:clamp(44px,13vw,58px);line-height:1.1;color:var(--green);margin:0}
-.names .zh{display:flex;align-items:center;gap:14px;font-family:var(--serif);font-weight:400;font-size:20px;letter-spacing:.3em;color:var(--gold-ink);margin:0;padding-left:.3em}
-.names .zh .rings{display:block;width:40px;height:22px;flex:none;color:var(--gold)}
+.names .en{font-family:var(--script);font-size:clamp(20px,5.5vw,24px);letter-spacing:.22em;line-height:1.4;color:var(--gold);margin:0;padding-left:.22em}
+.names .zh{display:flex;align-items:center;font-family:var(--serif);font-weight:700;font-size:clamp(44px,13vw,58px);line-height:1.2;letter-spacing:.12em;color:var(--navy);margin:0;padding-left:.12em}
+.dia{display:inline-block;width:9px;height:9px;background:var(--gold);transform:rotate(45deg);vertical-align:middle;margin:0 14px;flex:none}
+.en .dia{margin:0 9px}
 .dateline{font-family:var(--cap);font-weight:700;font-size:30px;letter-spacing:.14em;color:var(--green);padding-left:.14em;margin:0}
 .where{font-size:15px;letter-spacing:.25em;color:var(--soft);padding-left:.25em;margin:6px 0 0}
 .sprig{display:block;margin:0 auto;width:150px;height:auto;color:var(--gold)}
@@ -144,7 +146,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);border-col
 .result .note{font-size:13px;color:var(--soft);letter-spacing:.05em;margin-top:10px}
 
 .foot{background:var(--green);color:var(--paper);padding-block:60px 90px}
-.foot .script{font-family:var(--script);font-style:italic;font-size:48px;color:var(--gold);line-height:1.2;margin:0 0 6px}
+.foot .script{font-family:var(--script);font-size:48px;color:var(--gold);line-height:1.2;margin:0 0 6px}
 .foot p{letter-spacing:.2em;font-size:15px}
 
 
@@ -152,8 +154,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);border-col
 .arch img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%;border-radius:999px 999px 0 0}
 .gal{background:var(--paper)}
 .car{display:flex;flex-direction:column;align-items:center;gap:18px}
-.main-btn{display:inline-block;max-width:min(100%,320px);padding:8px;margin:0;border:1px solid var(--gold);background:#fff;cursor:zoom-in;box-shadow:0 8px 22px rgba(31,58,52,.14)}
-.main-btn img{display:block;max-width:100%;width:auto;height:auto;max-height:58vh;transition:opacity .35s}
+.main-btn{display:flex;align-items:center;justify-content:center;width:min(100%,320px);height:min(440px,60vh);padding:8px;margin:0 auto;border:1px solid var(--gold);background:#fff;cursor:zoom-in;box-shadow:0 8px 22px rgba(31,58,52,.14)}
+.main-btn img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;transition:opacity .35s}
 .main-btn img.fade{opacity:.2}
 .thumbs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .thumb{width:56px;height:56px;padding:2px;margin:0;border:1px solid var(--gold);background:#fff;cursor:pointer;opacity:.55;transition:opacity .2s,box-shadow .2s}
@@ -165,7 +167,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);border-col
 .gal-cnt{font-family:var(--cap);font-weight:700;font-size:14px;letter-spacing:.2em;color:var(--gold-ink);min-width:64px;text-align:center}
 .hint2{font-size:13px;letter-spacing:.2em;color:var(--soft);margin:0}
 .ring-gold{display:inline-block;width:.6em;height:.33em;vertical-align:middle;color:var(--gold);margin:0 .1em}
-.foot .script{letter-spacing:.10em}
+.foot .script{letter-spacing:.12em}
 .en-line{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:19px;letter-spacing:.03em;line-height:1.6;color:var(--ink);margin:0 0 8px}
 .lb{position:fixed;inset:0;z-index:180;display:grid;place-items:center;background:rgba(18,32,28,.94);padding:56px 60px;padding-left:max(60px,env(safe-area-inset-left,0px));padding-right:max(60px,env(safe-area-inset-right,0px))}
 .lb[hidden]{display:none}
@@ -229,7 +231,7 @@ var CONFIG = {
 
   // 倒數計時(日期格式請勿更動)
   weddingDate: "2027-05-22T11:30:00+08:00",
-  countdownNote: "2027 年 5 月 22 日 (六) 中午 11:30",
+  countdownNote: "2027 年 5 月 22 日(六)中午 11:30",
   countdownDone: "我們結婚了,謝謝您的祝福",
 
   // 婚禮流程(每一組是一個時段)
@@ -251,7 +253,7 @@ var CONFIG = {
   ],
 
   // RSVP
-  rsvpNote: "請於 2027 年 4 月 20 日前回覆,方便我們為您安排座位。",
+  rsvpNote: "點擊下方填寫問卷",
   rsvpUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdkL5smzLzZdS3EwRtEbk3PwVYoDbPQ-79rNCFuoAOfimqoEQ/viewform?usp=header",
 
   footerLine: "期待在最重要的日子與您相見",
@@ -260,8 +262,7 @@ var CONFIG = {
   arch: "photos/arch.jpg",                   // 首頁拱門照片;不要的話改成 ""
   gallery: [                                 // 我們的日常照片,想加幾張就多加幾行
     "photos/gallery-1.jpg",
-    "photos/gallery-2.jpg",
-    "photos/gallery-3.jpg"
+    "photos/gallery-2.jpg"
   ],
   music: "music/bgm.mp3"                     // 背景音樂;不要的話改成 ""
 };
@@ -310,8 +311,8 @@ var CONFIG = {
     <p class="script rv d1" data-f="heroScript"></p>
     <div class="arch rv d2" id="arch-wrap"><img id="arch-img" alt=""></div>
     <div class="names rv d2">
+      <p class="zh"><span data-f="zhGroom"></span><i class="dia"></i><span data-f="zhBride"></span></p>
       <p class="en" id="name-en"></p>
-      <p class="zh"><span data-f="zhGroom"></span><svg class="rings" viewBox="0 0 40 22" aria-hidden="true"><circle cx="14" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="26" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span data-f="zhBride"></span></p>
     </div>
     <p class="dateline rv d3" data-f="dateText"></p>
     <p class="where rv d3" data-f="dayTimeText"></p>
@@ -405,7 +406,7 @@ function esc(t){return String(t).replace(/[&<>"']/g,function(c){return {"&":"&am
 
 /* 1. 把設定區的內容放進頁面 */
 document.querySelectorAll("[data-f]").forEach(function(el){var v=C[el.getAttribute("data-f")];el.textContent=v==null?"":v});
-var RING='<svg class="ring-gold" viewBox="0 0 40 22" aria-hidden="true"><circle cx="14" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="26" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>';
+var RING='<i class="dia"></i>';
 ["name-en","name-letter"].forEach(function(id){
   var el=$(id),pr=String(C.nameEn).split("&");
   if(pr.length<2){el.textContent=C.nameEn}else{el.innerHTML=esc(pr[0].trim())+" "+RING+" "+esc(pr[1].trim())}
