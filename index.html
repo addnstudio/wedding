@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edwin & Grace 婚禮喜帖</title>
+    <!-- 引入 Google 字體與 Lightbox 燈箱效果樣式 -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+TC:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fcfbf9;
+            --text-main: #333333;
+            --text-light: #666666;
+            --accent-color: #d4a373;
+            --border-color: #e6dfd5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Serif TC', 'Cormorant Garamond', serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* 開場動畫遮罩 */
+        #welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #fcfbf9 0%, #f4eee1 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .welcome-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            color: #2c2c2c;
+        }
+
+        .welcome-date {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .open-btn {
+            background-color: #2c2c2c;
+            color: #fff;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .open-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            min-height: 100vh;
+        }
+
+        section {
+            padding: 40px 25px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* 圖片樣式 */
+        .photo-frame {
+            width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* 文字排版 */
+        h1, h2, h3 {
+            font-weight: 400;
+        }
+
+        .names-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            margin-bottom: 5px;
+        }
+
+        .date-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--text-light);
+            letter-spacing: 2px;
+        }
+
+        .quote-box {
+            font-style: italic;
+            color: var(--text-light);
+            margin: 25px 0;
+            font-size: 1.1rem;
+        }
+
+        .section-title-en {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: #c5b358;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .text-main {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* 倒數計時器樣式 */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .countdown-box {
+            background: #f9f8f6;
+            padding: 12px 15px;
+            border-radius: 8px;
+            min-width: 70px;
+            border: 1px solid var(--border-color);
+        }
+
+        .countdown-num {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-main);
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* 相簿輪播樣式 */
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 20px 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.4);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+            font-size: 1rem;
+        }
+
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
+
+        /* 按鈕樣式 (RSVP) */
+        .rsvp-btn {
+            display: inline-block;
+            background-color: var(--text-main);
+            color: #ffffff;
+            padding: 14px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .rsvp-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* 地圖資訊區塊 */
+        .info-grid {
+            margin: 20px 0;
+            text-align: left;
+            background: #f9f8f6;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .info-grid p {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. 開場動畫與背景音樂控制 -->
+    <div id="welcome-overlay">
+        <h1 class="welcome-title">Edwin & Grace</h1>
+        <div class="welcome-date">2026.11.14[cite: 1, 2]</div>
+        <button class="open-btn" onclick="openInvitation()">開啟喜帖</button>
+    </div>
+
+    <!-- 背景音樂 (可替換 src 網址為您的音樂檔案連結) -->
+    <audio id="bg-music" loop>
+        <source src="https://example.com/wedding-music.mp3" type="audio/mpeg">
+        您的瀏覽器不支援音樂播放器
+    </audio>
+
+    <div class="container">
+        
+        <!-- 封面區塊 -->
+        <section>
+            <h1 class="names-header">Edwin<br><span style="font-size: 2rem; color: #777;">&</span><br>Grace</h1>
+            <div class="date-header">2026.11.14[cite: 1, 2]</div>
+            <div class="photo-frame">
+                <img src="您的第一張照片連結.jpg" alt="Edwin & Grace 婚紗照[cite: 2]">
+            </div>
+            <div class="quote-box">
+                「 當收到這封喜帖的時候<br>我們的婚禮已經開始倒數啦<br>You're Invited! 」[cite: 2]
+            </div>
+        </section>
+
+        <!-- 3. 婚禮倒數計時器 -->
+        <section style="background-color: #faf9f6;">
+            <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin-bottom: 10px;">Wedding Countdown</h3>
+            <p>距離我們幸福的這一刻還有</p>
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <div id="days" class="countdown-num">00</div>
+                    <div class="countdown-label">天</div>
+                </div>
+                <div class="countdown-box">
+                    <div id="hours" class="countdown-num">00</div>
+                    <div class="countdown-label">時</div>
+                </div>
+                <div class="countdown-box">
+                    <div id="minutes" class="countdown-num">00</div>
+                    <div class="countdown-label">分</div>
+                </div>
+                <div class="countdown-box">
+                    <div id="seconds" class="countdown-num">00</div>
+                    <div class="countdown-label">秒</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 故事與介紹 -->
+        <section>
+            <div class="section-title-en">Our Love Story</div>
+            <h2 style="font-size: 1.5rem; margin-bottom: 20px;">Guess what? We're getting married!<br><span style="font-size: 1.2rem; font-weight: normal;">欸! 我們要結婚啦!</span></h2>
+            
+            <p class="text-main">Yep, we're the two people who eat together, argue together, and somehow still choose each other.</p>
+            <p>沒錯，就是那個每天一起吃飯、耍廢、吵架，最後還是選擇彼此的兩個人[cite: 3]。[cite: 3]</p>
+            <br>
+            <p class="text-main">So please come hungry, come thirsty, and most importantly, come ready to PARTY!</p>
+            <p>所以這一天，請務必來吃好、喝好、玩好！[cite: 3]</p>
+            <br>
+            <p style="font-style: italic; color: #888;">The bride isn't running away, and the groom still has time to reconsider.</p>
+            <p style="font-size: 0.9rem; color: #888;">新娘不逃婚，新郎也還來得及反悔[cite: 3]。</p>
+
+            <div style="margin-top: 30px; display: flex; justify-content: space-around;">
+                <div>
+                    <strong>Groom 新郎</strong><br>
+                    <span style="font-family: 'Cormorant Garamond'; font-size: 1.3rem;">Edwin</span>
+                </div>
+                <div>
+                    <strong>Bride 新娘</strong><br>
+                    <span style="font-size: 1.3rem;">奇奇</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 婚紗輪播相簿 (點擊可放大) -->
+        <section>
+            <div class="section-title-en">Wedding Gallery</div>
+            <p>點擊照片可放大瀏覽更多婚紗照</p>
+            
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide">
+                        <a href="您的相片1連結.jpg" data-lightbox="wedding-gallery" data-title="Edwin & Grace 婚紗照 1">
+                            <img src="您的相片1連結.jpg" alt="婚紗照1[cite: 4]">
+                        </a>
+                    </div>
+                    <div class="carousel-slide">
+                        <a href="您的相片2連結.jpg" data-lightbox="wedding-gallery" data-title="Edwin & Grace 婚紗照 2">
+                            <img src="您的相片2連結.jpg" alt="婚紗照2[cite: 4]">
+                        </a>
+                    </div>
+                    <div class="carousel-slide">
+                        <a href="您的相片3連結.jpg" data-lightbox="wedding-gallery" data-title="Edwin & Grace 婚紗照 3">
+                            <img src="您的相片3連結.jpg" alt="婚紗照3[cite: 6]">
+                        </a>
+                    </div>
+                </div>
+                <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+        </section>
+
+        <!-- 情感文字與誓言 -->
+        <section>
+            <div class="photo-frame">
+                <img src="您的第二張照片連結.jpg" alt="浪漫婚紗照[cite: 4]">
+            </div>
+            <p style="margin-top: 25px;">走過風雨、經歷歲月，我們的愛情依舊堅定而溫暖，為彼此的人生增添無盡的幸福[cite: 4]。[cite: 4]</p>
+            <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.5rem; margin: 20px 0 10px;">Welcome to our wedding</h3>
+            <p>在這片幸福的天空下，我們結合彼此的心[cite: 4]。</p>
+        </section>
+
+        <!-- 婚禮資訊與地點 -->
+        <section>
+            <div class="section-title-en">Time & Address</div>
+            
+            <div class="info-grid">
+                <p><strong>📅 婚禮時間 (Time)：</strong></p>
+                <p class="text-main">2026.11.14[cite: 1, 5]</p>
+                <p>18:00 入席 / 18:30 開席[cite: 5]</p>
+                
+                <br>
+                <p><strong>📍 婚禮地點 (Address)：</strong></p>
+                <p class="text-main">福容大飯店 桃園機場捷運A8店[cite: 5]</p>
+                <p>桃園市龜山區文化里復興一路2號3樓[cite: 5]</p>
+            </div>
+
+            <div class="photo-frame">
+                <img src="您的地圖截圖連結.jpg" alt="交通地圖[cite: 5]">
+            </div>
+        </section>
+
+        <!-- 5. RSVP 按鈕連結 Google 表單 -->
+        <section style="background-color: #faf9f6;">
+            <div class="section-title-en">RSVP</div>
+            <h3 style="margin-bottom: 10px;">出席填寫</h3>
+            <p>誠摯邀請您填寫出席表單，讓我們為您準備最完美的席位。</p>
+            <!-- 請將下方href內的網址替換為您的 Google 表單連結 -->
+            <a href="https://forms.gle/您的Google表單連結" target="_blank" class="rsvp-btn">填寫出席問卷 (RSVP)</a>
+        </section>
+
+        <!-- 結尾感謝 -->
+        <section>
+            <h2 style="font-family: 'Cormorant Garamond'; font-size: 2rem; margin-bottom: 15px;">Thank You</h2>
+            <p>致最親愛的家人和朋友們<br>感謝你們百忙之中來參加我們的婚禮[cite: 6]</p>
+            <p>有您的見證和祝福，這一刻更加溫馨[cite: 6]。</p>
+            <div class="photo-frame" style="margin-top: 30px;">
+                <img src="您的第三張照片連結.jpg" alt="感謝有你[cite: 6]">
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 引入 Lightbox 燈箱效果 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+    
+    <script>
+        // 1. 開啟喜帖與音樂撥放控制
+        function openInvitation() {
+            const overlay = document.getElementById('welcome-overlay');
+            const music = document.getElementById('bg-music');
+            
+            overlay.classList.add('hidden');
+            
+            // 嘗試播放背景音樂
+            music.play().catch(error => {
+                console.log("自動播放被瀏覽器攔截，需由使用者手動互動播放:", error);
+            });
+        }
+
+        // 3. 婚禮倒數計時器邏輯
+        const weddingDate = new Date('2026-11-14T18:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').innerText = '0';
+                document.getElementById('hours').innerText = '0';
+                document.getElementById('minutes').innerText = '0';
+                document.getElementById('seconds').innerText = '0';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // 2. 婚紗輪播相簿邏輯
+        let currentIndex = 0;
+        const track = document.getElementById('carouselTrack');
+        const slides = document.querySelectorAll('.carousel-slide');
+
+        function moveSlide(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = slides.length - 1;
+            } else if (currentIndex >= slides.length) {
+                currentIndex = 0;
+            }
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+    </script>
+</body>
+</html>
